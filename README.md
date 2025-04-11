@@ -19,6 +19,8 @@ Figure out which compiler you have by typing `g++ --version` or `clang++ --versi
 4. The terminal line should return without throwing any errors or warnings.
 5. Compiling the code should have made an executable (.exe) file
 
+Note to celeste: ```x86_64-w64-mingw32-g++ -static -static-libgcc -static-libstdc++ -o designer.exe designer.cpp``` compile for export
+
 ## Running the code
 You should be able to double click on the executable (which will pull up a terminal window and start the program) or type  ```./designer``` into a terminal that you already have open.
 The program will then print out progress updates and ask for prompts as needed. 
