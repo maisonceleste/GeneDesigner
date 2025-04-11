@@ -19,6 +19,8 @@ Figure out which compiler you have by typing `g++ --version` or `clang++ --versi
 4. The terminal line should return without throwing any errors or warnings.
 5. Compiling the code should have made an executable (.exe) file
 
+*if compiling doesn't work copy and paste the code from designer_online.cpp into [here.](https://cpp.sh/) It can't input or output files, but if you paste in a sequence, it can print the output onto the screen.
+
 Note to celeste: ```x86_64-w64-mingw32-g++ -static -static-libgcc -static-libstdc++ -o designer.exe designer.cpp``` compile for export
 
 ## Running the code
