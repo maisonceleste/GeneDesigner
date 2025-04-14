@@ -62,6 +62,19 @@ map <char, vector<string>> codonMap = {
     {'*', {"TAG", "TAA", "TGA"}},
 };
 
+map<string, string> improbableCodons = {
+    {"TTA", "CTG"},{"TTG", "CTG"},
+    {"CTT", "CTG"},{"CTC", "CTA"},
+    {"CTA", "CTG"},{"ATA", "ATT"},
+    {"TCT", "AGC"},{"TCC", "AGC"},
+    {"TCA", "AGC"},{"CCC", "CCG"},
+    {"CCA", "CCG"},{"ACA", "ACC"},
+    {"GCT", "GCG"},{"CGA", "CGC"},
+    {"CGG", "CGC"},{"AGT", "AGC"},
+    {"AGA", "AGC"},{"AGG", "AGC"},
+    {"GGA", "GGC"},{"GGG", "GGC"}
+};
+
 
 string readFasta(ifstream& inputstream){
     cout << "inside readFasta function" << endl;
@@ -108,6 +121,26 @@ void prepSequence(string& sequence){
         cout << "Adding stop codon" << endl;
         sequence = sequence + "*";
     }
+}
+
+void checkPairs(string& sequence){
+    int i = 1;
+    string prev = sequence.substr(0,3);
+    string current;
+    string newCodon;
+    while (i < sequence.size()/3){
+        current = sequence.substr(i*3, 3);
+        //cout << "Index: " << i*3 << " Previous: " << prev << " Current: " << current << endl;
+        if (improbableCodons.find(prev) != improbableCodons.end() && improbableCodons.find(current) != improbableCodons.end()){
+            newCodon = improbableCodons[current];
+            sequence.replace(i*3, 3, newCodon);
+            cout << "Replacing " << current << " with " << newCodon << " at index " << i*3 << endl;
+            current = newCodon;
+        }
+        prev = current;
+        i++;
+    }
+    return;
 }
 
 int seed = 100;
@@ -171,6 +204,8 @@ int main(){
 
     // Now we reverse translate
     string outputSequence = reverseTranslate(inputSequence);
+
+    checkPairs(outputSequence);
 
     //print sequence to output folder
     cout << "What do you want to name the output file? (note that if the file already exists, this will overwrite it)" << endl;
