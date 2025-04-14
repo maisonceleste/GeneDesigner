@@ -28,4 +28,4 @@ You should be able to double click on the executable (which will pull up a termi
 The program will then print out progress updates and ask for prompts as needed. 
 
 ## How this program works
-I've used an E. coli codon probability chart to have the program select a codon for each amino acid in the sequence randomly, but with physiological probabilities. This increases sequence complexity which reduces the risk of the gene forming secondary structures that inhibit expression. The program will check for and add start codons, add a 10xHis-tag if requested, and check for and add stop codons. 
+I've used an E. coli codon probability chart to have the program select a codon for each amino acid in the sequence randomly, but with physiological probabilities. It then will go through and remove change neighboring codons where both are <15% probability. This increases sequence complexity which reduces the risk of the gene forming secondary structures that inhibit expression. The program will check for and add start codons, add a 10xHis-tag if requested, and check for and add stop codons. 
